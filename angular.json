@@ -15,11 +15,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-model/ng-package.json"
+            "project": "projects/ngx-model/ng-package.json",
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-model/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-model/tsconfig.lib.prod.json",
             },
             "development": {
               "tsConfig": "projects/ngx-model/tsconfig.lib.json"

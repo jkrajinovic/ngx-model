@@ -1,4 +1,5 @@
 import { ObjectLiteral } from './../types/object-literal';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 /**
  * Used for populating model without the need for constructor.
@@ -9,38 +10,41 @@ import { ObjectLiteral } from './../types/object-literal';
  * This will be default in Angular 12
  */
 export abstract class Model<T extends ObjectLiteral> {
-    loadModel(input: T) {
-        if (input === undefined) {
-            throw new Error(`Cannot load <<${this.constructor.name}>> from undefined!`);
-        }
-
-        const keys = Object.keys(this);
-
-        if (keys.length === 0) {
-            throw new Error(
-                'Please initialize values in class when using model. See https://stackoverflow.com/a/54559894 !'
-            );
-        }
-
-        keys.forEach((key:string) => {
-            if (input[key]) {
-                (this as ObjectLiteral)[key] = input[key];
-            }
-        });
-        return this;
+  loadModel(input: T) {
+    if (input === undefined) {
+      throw new Error(`Cannot load <<${this.constructor.name}>> from undefined!`);
     }
 
-    /**
-     * Returns entity without null or undefined values
-     * Helpful when sending to backend
-     */
-    clean() {
-        Object.keys(this).forEach((key:string) => {
-            const self = this as ObjectLiteral;
-            if (self[key] === undefined || self[key] === null) {
-                delete self[key][key];
-            }
-        });
-        return this;
+    const keys = Object.keys(this);
+
+    if (keys.length === 0) {
+      throw new Error(
+        'Please initialize values in class when using model. See https://stackoverflow.com/a/54559894!'
+      );
     }
+
+    keys.forEach((key: string) => {
+      if (typeof input[key] !== undefined) {
+        (this as ObjectLiteral)[key] = input[key];
+      }
+    });
+    return this;
+  }
+
+  /**
+   * Returns entity without null or undefined properties
+   * Helpful when sending to backend
+   */
+  clean(): any {
+    const clean: any = cloneDeep(this);
+
+    Object.keys(clean).forEach((key: string) => {
+      if (clean[key] === undefined || clean[key] === null || Object.is(clean[key], NaN)) {
+        delete clean[key];
+      }
+    });
+
+    return clean;
+  }
+
 }
