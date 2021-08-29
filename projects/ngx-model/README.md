@@ -1,6 +1,6 @@
 # NgxModel
 
-This util ames to make working with models in Typescript and Angualr much easier.
+This util ames to make working with models in Typescript and Angular much easier.
 
 Features:
 
@@ -56,7 +56,7 @@ const product = new Product().loadModel(productFromBackend);
 
 ```
 
-### 2. We have intelisense while populating manualy our object.
+### 2. We have intelisense while populating manually our object.
 
 ```
 const product = new Product().loadModel({
@@ -82,11 +82,11 @@ const loggerOptions = {url: 'https://mycustomlogendpoint.com/api/logs'}
 const options = new Options().loadModel(loggerOptions);
 ```
 
-\*\*\* here url will be set by developer but property enabled will be true acting like default if not passed into loadModel() function. We have avoided nasty checks if developer has passed enabled property for configuration.
+\*\*\* here the url property will be set by developer but property enabled will be true acting like default if not passed into loadModel() function. We have avoided nasty checks if developer has passed enabled property for configuration.
 
 ### 5. We have a nice way to load relations also by overriding loadModel() function.
 
-\*\*\* This will probably be automated in future
+\*\*\* This will probably be available without overriding in future
 
 ```
 export class User extends Model<UserDTO>{
