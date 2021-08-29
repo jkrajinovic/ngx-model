@@ -32,8 +32,9 @@ export abstract class Model<T extends ObjectLiteral> {
   }
 
   /**
-   * Returns entity without null or undefined properties
-   * Helpful when sending to backend
+   * Returns deep cloned entity without null, undefined or NaN properties
+   * Helpful when sending data to backend
+   * TODO: recursevly clean()
    */
   clean(): any {
     const clean: any = cloneDeep(this);

@@ -60,7 +60,7 @@ const product = new Product().loadModel(productFromBackend);
 
 ```
 const product = new Product().loadModel({
-  name: "Jacket" // while typing intelisense kiks in helping becouse of ProductDTO.
+  name: "Jacket" // while typing intelisense kicks in helping because of ProductDTO.
 })
 
 ```
