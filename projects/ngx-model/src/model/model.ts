@@ -12,7 +12,9 @@ import cloneDeep from 'lodash-es/cloneDeep';
 export abstract class Model<T extends ObjectLiteral> {
   loadModel(input: T) {
     if (input === undefined) {
-      throw new Error(`Cannot load <<${this.constructor.name}>> from undefined!`);
+      throw new Error(
+        `Cannot load <<${this.constructor.name}>> from undefined!`
+      );
     }
 
     const keys = Object.keys(this);
@@ -24,7 +26,7 @@ export abstract class Model<T extends ObjectLiteral> {
     }
 
     keys.forEach((key: string) => {
-      if (typeof input[key] !== undefined) {
+      if (typeof input[key] !== 'undefined') {
         (this as ObjectLiteral)[key] = input[key];
       }
     });
@@ -40,12 +42,15 @@ export abstract class Model<T extends ObjectLiteral> {
     const clean: any = cloneDeep(this);
 
     Object.keys(clean).forEach((key: string) => {
-      if (clean[key] === undefined || clean[key] === null || Object.is(clean[key], NaN)) {
+      if (
+        clean[key] === undefined ||
+        clean[key] === null ||
+        Object.is(clean[key], NaN)
+      ) {
         delete clean[key];
       }
     });
 
     return clean;
   }
-
 }
