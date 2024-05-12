@@ -13,7 +13,7 @@ export class User extends Model<UserDTO>{
   /**
    * Overriden to be able to load relation
    */
-  loadModel(input: UserDTO) {
+  override loadModel(input: UserDTO) {
     super.loadModel(input);
     console.log('from user', this);
     this.address = new Address().loadModel(input.address);
