@@ -1,5 +1,5 @@
 import { ObjectLiteral } from './../types/object-literal';
-import cloneDeep from 'lodash-es/cloneDeep';
+import { cloneDeep } from 'lodash-es';
 
 /**
  * Used for populating model without the need for constructor.
